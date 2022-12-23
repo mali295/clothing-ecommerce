@@ -1,11 +1,9 @@
 import { useEffect } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation
-} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import Checkout from "./scenes/home/checkout/Checkout";
+import Confirmation from "./scenes/home/checkout/Confirmation";
 import Home from "./scenes/home/Home"
+import ItemDetails from "./scenes/home/itemDetails/ItemDetails";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -25,6 +23,9 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="item/:itemID" element={<ItemDetails />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="checkout/success" element={<Confirmation />} />
         </Routes>
       </BrowserRouter>
 
