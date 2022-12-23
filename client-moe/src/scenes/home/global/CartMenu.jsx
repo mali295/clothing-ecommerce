@@ -18,7 +18,7 @@ const CartMenu = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.cart.cart);
-    const setIsCartOpen = useSelector((state) => state.cart.setIsCartOpen);
+    const setIsCartOpen = useSelector((state) => state.cart.isCartOpen);
 
     const totalPrice = cart.reduce((total, item) => {
         return total + item.count * item.attributes.price;
@@ -54,10 +54,87 @@ const CartMenu = () => {
 
                     </FlexBox>
 
+                    <Box>
+                        {cart.map((item) => (
+                            <Box key={`${item.attributes.name}-${item.id}`}>
+                                <FlexBox p="15px 0">
+                                    <Box flex="1 1 40%">
+                                        <img  
+                                            alt={item?.name}
+                                            width="123px"
+                                            height="164px"
+                                            src={`http://localhost:3000${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                                        />
+
+                                    </Box>
+                                    <Box flex="1 1 60%">
+                                        <FlexBox mb="5px">
+                                            <Typography fontWeight="bold">
+                                                {item.attributes.name}
+                                            </Typography>
+                                            <IconButton onClick={() => dispatch(removeFromCart ({id: item.id}))}>
+                                                <CloseIcon />
+                                            </IconButton>
+
+                                        </FlexBox>
+                                        <Typography>{item.attributes.shortDescription}</Typography>
+                                        <FlexBox m="15px 0" >
+                                            <Box
+                                            display="flex"
+                                            alignItems="center"
+                                            border={`1.5px solid ${shades.neutral[500]}`}
+                                            >
+                                                <IconButton
+                                                    onClick={() => dispatch(decreaseCount({id: item.id}))}
+                                                >
+                                                    <RemoveIcon />
+                                                </IconButton>
+                                                <Typography>{item.count}</Typography>
+                                                <IconButton
+                                                    onClick={() => dispatch(increaseCount({id: item.id}))}
+                                                >
+                                                    <AddIcon />
+                                                </IconButton>
+
+                                            </Box>
+                                            <Typography fontWeight="bold">
+                                                ${item.attributes.price}
+                                            </Typography>
+
+                                        </FlexBox>
+
+
+                                    </Box>
+                                </FlexBox>
+                                <Divider />
+
+                            </Box>
+                        ))}
+                    </Box>
+
+                    <Box m="20px 0">
+                        <FlexBox m="20px 0">
+                            <Typography fontWeight="bold">SUBTOTAL</Typography>
+                            <Typography fontWeight="bold">${totalPrice}</Typography>
+                        </FlexBox>
+                        <Button 
+                        sx={{
+                            backgroundColor: shades.primary[400],
+                            color: "white",
+                            borderRadius: "100px",
+                            minWidth: "100px",
+                            padding: "20px 40px",
+                            m: "20px 0"
+                        }}
+                        onClick={() => {
+                            navigate("/checkout");
+                            dispatch(setIsCartOpen({}));
+                        }}
+                        >CHECKOUT</Button>
+                    </Box>
+
                 </Box>
-
             </Box>
-
         </Box>
 
     )
