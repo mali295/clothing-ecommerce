@@ -32,6 +32,23 @@ const MainCarousel = () => {
                     sx = {{
                         position: "absolute",
                         top: "0",
+                        left: "0",
+                        color: "white",
+                        padding: "5px",
+                        zIndex: "10",
+                    }}
+                >
+
+                    <NavigateBefore sx={{fontSize: 40}} />
+                </IconButton>
+            )}
+            renderArrowNext={(onClickHandler, hasPrev, label) => (
+                <IconButton
+                    onClick={onClickHandler}
+                    sx = {{
+                        position: "absolute",
+                        top: "0",
+                        right: "0",
                         color: "white",
                         padding: "5px",
                         zIndex: "10",
