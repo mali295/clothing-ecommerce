@@ -1,6 +1,6 @@
 import {useTheme} from "@mui/material"
 import {Box, Typography} from "@mui/material"
-import { shades} from "../../theme"
+import { shades} from "../../../theme"
 
 
 const Footer = () => {
