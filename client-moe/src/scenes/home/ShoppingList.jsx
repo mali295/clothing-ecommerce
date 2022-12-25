@@ -35,11 +35,11 @@ const ShoppingList = () => {
         (item) => item.attributes.category === "topRated"
     );
 
-    const newArrivalItems = items.filter(
+    const newArrivalsItems = items.filter(
         (item) => item.attributes.category === "newArrivals"
     );
 
-    const bestsSllersItems = items.filter(
+    const bestSellersItems = items.filter(
         (item) => item.attributes.category === "bestsellers"
     )
 
@@ -75,7 +75,18 @@ const ShoppingList = () => {
             rowGap="20px"
             columnGap="1.33%"
         >
-            
+            {value === "all" && items.map((item) => (
+                <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+            {value === "newArrivals" && newArrivalsItems.map((item) => (
+                <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+            {value === "bestSellers" && bestSellersItems.map((item) => (
+                <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+            {value === "topRated" && topRatedItems.map((item) => (
+                <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
         </Box>
 
 
